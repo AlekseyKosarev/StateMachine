@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _Project.System.StateMachine.Interfaces;
+using UnityEngine;
 
 namespace _Project.System.StateMachine.StateMachine.StateRegistry
 {
@@ -34,5 +35,11 @@ namespace _Project.System.StateMachine.StateMachine.StateRegistry
                 currentStateMap.Remove(stateType);
             }
         }
+
+        public int GetCountStatesBase()
+        {
+            return states.Count;
+        }
+        public List<IState<T>> GetStatesBase() => states;
     }
 }

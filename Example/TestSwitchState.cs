@@ -1,9 +1,9 @@
+using System.Collections.Generic;
 using _Project.System.StateMachine.Example.MonoBehaviorStates;
 using _Project.System.StateMachine.Example.Realizations.States.GameStates;
 using _Project.System.StateMachine.Example.Realizations.States.MaterialStates;
+using _Project.System.StateMachine.Interfaces;
 using _Project.System.StateMachine.StateMachine;
-using _Project.System.StateMachine.StateMachine.ActiveStateManager;
-using _Project.System.StateMachine.StateMachine.StateRegistry;
 using UnityEngine;
 
 namespace _Project.System.StateMachine.Example
@@ -15,30 +15,28 @@ namespace _Project.System.StateMachine.Example
         public void Init()
         {
             InitGame();
-            _globalStates.AddStateToRegistry(new InGameState());
-            _globalStates.AddStateToRegistry(new PauseState());
+            Debug.Log(_globalStates.GetStates());
             _globalStates.SetStateActive<InGameState>(true, null);
             
             InitMaterial();
-            _materialStates.AddStateToRegistry(new SimulateState());
         }
 
         void InitGame()
         {
-            var stateRegistry = new StateRegistry<IGameState>();
-            var stateActivator = new StateActivator<IGameState>();
-
-            var stateMachine = new StateMachine<IGameState>(stateRegistry, stateActivator);
-            _globalStates = stateMachine;
+            var stateMachine = new StateMachineBuilder<IGameState>()
+                .Init()
+                .AddState(new InGameState())
+                .AddState(new PauseState());
+            _globalStates = stateMachine.Build();
         }
 
         void InitMaterial()
         {
-            var stateRegistry = new StateRegistry<IMaterialState>();
-            var stateActivator = new StateActivator<IMaterialState>();
-
-            var stateMachine = new StateMachine<IMaterialState>(stateRegistry, stateActivator);
-            _materialStates = stateMachine;
+            var stateMachine = new StateMachineBuilder<IMaterialState>()
+                .Init()
+                .AddState(new SimulateState())
+                .AddState(new SelectState());
+            _materialStates = stateMachine.Build();;
         }
 
         public void Update()

@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using _Project.System.StateMachine.Interfaces;
 using _Project.System.StateMachine.StateMachine.ActiveStateManager;
 using _Project.System.StateMachine.StateMachine.StateRegistry;
+using UnityEngine;
 
 namespace _Project.System.StateMachine.StateMachine
 {
@@ -62,5 +64,8 @@ namespace _Project.System.StateMachine.StateMachine
         {
             return base.GetStateFromRegistryBase<TState>();
         }
+        
+        public int GetCountStates() => _stateRegistry.GetCountStatesBase();
+        public List<IState<T>> GetStates() => _stateRegistry.GetStatesBase();
     }
 }
