@@ -24,7 +24,6 @@ namespace _Project.System.StateMachine.Example
         void InitGame()
         {
             var stateMachine = new StateMachineBuilder<IGameState>()
-                .Init()
                 .AddState(new InGameState())
                 .AddState(new PauseState());
             _globalStates = stateMachine.Build();
@@ -33,7 +32,6 @@ namespace _Project.System.StateMachine.Example
         void InitMaterial()
         {
             var stateMachine = new StateMachineBuilder<IMaterialState>()
-                .Init()
                 .AddState(new SimulateState())
                 .AddState(new SelectState());
             _materialStates = stateMachine.Build();;

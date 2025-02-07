@@ -49,7 +49,7 @@ namespace _Project.System.StateMachine.StateMachine.ActiveStateManager
         {
             if (IsStateActive<TState>())
             {
-                Debug.Log ("State already active");
+                // Debug.Log ("State already active");
                 return; // Если состояние уже активно, ничего не делаем
             }
             DeactivateAllStates(context);
