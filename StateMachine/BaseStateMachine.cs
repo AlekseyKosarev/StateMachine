@@ -43,13 +43,12 @@ namespace _Project.System.StateMachine.StateMachine
             {
                 return;
             }
-            _stateActivator.SwitchToState<TState>(state, context);
+            _stateActivator.SwitchToState(state, context);
         }
 
-        protected bool IsStateActiveBase<TState>() where TState : IState<T>
+        protected bool IsStateActiveBase(IState<T> state)
         {
-            var status = _stateActivator.IsStateActive<TState>();
-            return status;
+            return _stateActivator.IsStateActive(state);;
         }
 
         protected IState<T> GetStateFromRegistryBase<TState>() where TState : IState<T>

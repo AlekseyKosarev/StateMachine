@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d18c4f530e2541fb81401bba00fbe9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 206157350474063476, guid: ca51970957d6a174992986487233f5a2, type: 3}
+  prefab: {fileID: 5739890158311562723, guid: 905a96027ecf17a43a26958fa43f0f2b, type: 3}
   countCopys: 1
 --- !u!4 &1208795948
 Transform:

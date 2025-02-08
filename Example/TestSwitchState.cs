@@ -45,7 +45,7 @@ namespace _Project.System.StateMachine.Example
             
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                var stateStatus = _globalStates.IsStateActive<InGameState>();
+                var stateStatus = _globalStates.IsStateActiveOfType<InGameState>();
                 if (!stateStatus)
                 {
                     _globalStates.SwitchToState<InGameState>(null);

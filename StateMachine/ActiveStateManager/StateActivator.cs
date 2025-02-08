@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Project.System.StateMachine.Interfaces;
-using UnityEngine;
 
 namespace _Project.System.StateMachine.StateMachine.ActiveStateManager
 {
     public class StateActivator<T> : IStateActivator<T>
     {
-        private HashSet<IState<T>> activeStates = new HashSet<IState<T>>();
+        private HashSet<IState<T>> activeStates = new();
 
         public void ActivateState(IState<T> state, T context)
         {
@@ -45,9 +44,9 @@ namespace _Project.System.StateMachine.StateMachine.ActiveStateManager
                 DeactivateState(state, context);
             }
         }
-        public void SwitchToState<TState>(IState<T> state, T context) where TState : IState<T>
+        public void SwitchToState(IState<T> state, T context)
         {
-            if (IsStateActive<TState>())
+            if (IsStateActive(state))
             {
                 // Debug.Log ("State already active");
                 return; // Если состояние уже активно, ничего не делаем
@@ -55,13 +54,15 @@ namespace _Project.System.StateMachine.StateMachine.ActiveStateManager
             DeactivateAllStates(context);
             ActivateState(state, context);
         }
-        public bool IsStateActive<TState>() where TState : IState<T>
+        public bool IsStateActive(IState<T> state)
         {
-            return activeStates.OfType<TState>().Any();
+            return activeStates.Contains(state);
+            //return activeStates.OfType<TState>().Any();
         }
         public void Update(T context)
         {
-            foreach (var state in activeStates.ToList())
+            // activeStates.C
+            foreach (var state in activeStates)
             {
                 state.UpdateState(context);
             }
