@@ -265,6 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1208795948}
   - component: {fileID: 1208795947}
+  - component: {fileID: 1208795949}
   m_Layer: 0
   m_Name: LevelBuilder
   m_TagString: Untagged
@@ -284,8 +285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d18c4f530e2541fb81401bba00fbe9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5739890158311562723, guid: 905a96027ecf17a43a26958fa43f0f2b, type: 3}
+  prefab: {fileID: 9105301677279889743, guid: 905a96027ecf17a43a26958fa43f0f2b, type: 3}
   countCopys: 1
+  levelData: {fileID: 1208795949}
 --- !u!4 &1208795948
 Transform:
   m_ObjectHideFlags: 0
@@ -301,6 +303,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1208795949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208795946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7e721c195d4cc78caf83481f163afb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1322653882
 GameObject:
   m_ObjectHideFlags: 0

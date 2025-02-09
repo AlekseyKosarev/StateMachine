@@ -14,10 +14,6 @@ namespace _Project.System.StateMachine.StateMachine
         {
             base.AddStateToRegistryBase(state);
         }
-        public void RemoveStateFromRegistry<TState>() where TState : IState<T>
-        {
-            base.RemoveStateFromRegistryBase<TState>();
-        }
         public void SetStateActive<TState>(bool setActive, T context) where TState : IState<T>
         {
             base.SetStateActiveBase<TState>(setActive, context);

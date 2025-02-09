@@ -6,29 +6,29 @@ namespace _Project.System.StateMachine.StateMachine.ActiveStateManager
 {
     public class StateActivator<T> : IStateActivator<T>
     {
-        private HashSet<IState<T>> activeStates = new();
+        private HashSet<IState<T>> _activeStates = new();
 
         public void ActivateState(IState<T> state, T context)
         {
-            if (!activeStates.Contains(state))
+            if (!_activeStates.Contains(state))
             {
                 state.EnterState(context);
-                activeStates.Add(state);
+                _activeStates.Add(state);
             }
         }
 
         public void DeactivateState(IState<T> state, T context)
         {
-            if (activeStates.Contains(state))
+            if (_activeStates.Contains(state))
             {
                 state.ExitState(context);
-                activeStates.Remove(state);
+                _activeStates.Remove(state);
             }
         }
         
         private void DeactivateAllStates(T context)
         {
-            foreach (var state in activeStates.ToList())
+            foreach (var state in _activeStates)
             {
                 DeactivateState(state, context);
             }
@@ -56,13 +56,13 @@ namespace _Project.System.StateMachine.StateMachine.ActiveStateManager
         }
         public bool IsStateActive(IState<T> state)
         {
-            return activeStates.Contains(state);
+            return _activeStates.Contains(state);
             //return activeStates.OfType<TState>().Any();
         }
         public void Update(T context)
         {
             // activeStates.C
-            foreach (var state in activeStates)
+            foreach (var state in _activeStates)
             {
                 state.UpdateState(context);
             }

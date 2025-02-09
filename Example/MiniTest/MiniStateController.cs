@@ -1,10 +1,11 @@
 using _Project.System.StateMachine.Example.EVENTS;
+using _Project.System.StateMachine.Example.LevelBuilderSystem;
 using _Project.System.StateMachine.StateMachine;
 using UnityEngine;
 
 namespace _Project.System.StateMachine.Example.MiniTest
 {
-    public class MiniStateController: MonoBehaviour
+    public class MiniStateController: BaseInstance
     {
         private StateMachine<TestContext> _states;
         private TestContext _testContext;
@@ -22,27 +23,27 @@ namespace _Project.System.StateMachine.Example.MiniTest
             _states.Update(_testContext);
         }
 
-        private void OnGame()
+        public override void OnGame()
         {
             _states.SetStateActive<OneState>(true, _testContext);
         }
 
-        private void OnPause()
+        public override void OnPause()
         {
             _states.SwitchToState<TwoState>(_testContext);
         }
         
-        private void OnEnable()
-        {
-            GameSwitch.OnGame += OnGame;
-            GameSwitch.OnPause += OnPause;
-            _testContext = new TestContext();
-        }
-        
-        private void OnDisable()
-        {
-            GameSwitch.OnGame -= OnGame;
-            GameSwitch.OnPause -= OnPause;
-        }
+        // private void OnEnable()
+        // {
+        //     GameSwitch.OnGame += OnGame;
+        //     GameSwitch.OnPause += OnPause;
+        //     _testContext = new TestContext();
+        // }
+        //
+        // private void OnDisable()
+        // {
+        //     GameSwitch.OnGame -= OnGame;
+        //     GameSwitch.OnPause -= OnPause;
+        // }
     }
 }

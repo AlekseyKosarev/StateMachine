@@ -21,11 +21,6 @@ namespace _Project.System.StateMachine.StateMachine
             _stateRegistry.AddStateToRegistry(state);
         }
 
-        protected void RemoveStateFromRegistryBase<TState>() where TState : IState<T>
-        {
-            _stateRegistry.RemoveStateFromRegistry<TState>();
-        }
-
         protected virtual void SetStateActiveBase<TState>(bool setActive, T context) where TState : IState<T>
         {
             var state = GetStateFromRegistryBase<TState>();
