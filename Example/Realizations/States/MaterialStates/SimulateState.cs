@@ -33,11 +33,11 @@ namespace _Project.System.StateMachine.Example.Realizations.States.MaterialState
         }
         void InitGame()
         {
-            var stateRegistry = new StateRegistry<IEffectStates>();
-            var stateActivator = new StateActivator<IEffectStates>();
-
-            var stateMachine = new StateMachineMono<IEffectStates>(stateRegistry, stateActivator);
-            _effectStates = stateMachine;
+            // var stateRegistry = new StateRegistry<IEffectStates>();
+            // var stateActivator = new StateActivator<IEffectStates>();
+            //
+            // var stateMachine = new StateMachineMono<IEffectStates>(stateRegistry, stateActivator);
+            // _effectStates = stateMachine;
         }
     }
 }

@@ -31,5 +31,6 @@ namespace _Project.System.StateMachine.StateMachine.StateRegistry
             return _states.Count;
         }
         public List<IState<T>> GetStatesBase() => _states.Values.ToList();
+        public Dictionary<Type, IState<T>> GetStatesDictBase() => _states;
     }
 }

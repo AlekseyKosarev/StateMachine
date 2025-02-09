@@ -1,37 +1,71 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Project.System.StateMachine.Interfaces;
 
 namespace _Project.System.StateMachine.StateMachine.ActiveStateManager
 {
+    public static class StateBitManager<T>
+    {
+        private static readonly Dictionary<Type, ulong> _typeToBit = new();
+        private static ulong _nextBit = 1; // Начинаем с 1 (0 не используется)
+
+        // Автоматически назначает бит новому типу состояния
+        public static ulong GetBitForType(Type stateType)
+        {
+            if (!_typeToBit.TryGetValue(stateType, out ulong bit))
+            {
+                if (_nextBit == 0) 
+                    throw new InvalidOperationException("No more bits available!");
+
+                bit = _nextBit;
+                _typeToBit[stateType] = bit;
+                _nextBit <<= 1; // Сдвигаем бит влево для следующего типа
+            }
+            return bit;
+        }
+    }
     public class StateActivator<T> : IStateActivator<T>
     {
-        private HashSet<IState<T>> _activeStates = new();
+        private ulong _activeStatesBits; // Битовая маска активных состояний
+        private readonly Dictionary<Type, IState<T>> _states; // Ссылка на ваш исходный словарь
+        
+        public StateActivator(Dictionary<Type, IState<T>> states)
+        {
+            _states = states;
+        }
 
         public void ActivateState(IState<T> state, T context)
         {
-            if (!_activeStates.Contains(state))
+            var bit = StateBitManager<T>.GetBitForType(state.GetType());
+            if ((_activeStatesBits & bit) == 0)
             {
                 state.EnterState(context);
-                _activeStates.Add(state);
+                _activeStatesBits |= bit; // Устанавливаем бит
             }
         }
 
         public void DeactivateState(IState<T> state, T context)
         {
-            if (_activeStates.Contains(state))
+            var bit = StateBitManager<T>.GetBitForType(state.GetType());
+            if ((_activeStatesBits & bit) != 0)
             {
                 state.ExitState(context);
-                _activeStates.Remove(state);
+                _activeStatesBits &= ~bit; // Сбрасываем бит
             }
         }
         
-        private void DeactivateAllStates(T context)
+        public void DeactivateAllStates(T context)
         {
-            foreach (var state in _activeStates)
+            foreach (var type in _states.Keys)
             {
-                DeactivateState(state, context);
+                var bit = StateBitManager<T>.GetBitForType(type);
+                if ((_activeStatesBits & bit) != 0)
+                {
+                    _states[type].ExitState(context);
+                }
             }
+            _activeStatesBits = 0; // Сброс всех битов за O(1)
         }
         public void ChangeStatusState(IState<T> state, bool setActive, T context)
         {
@@ -56,15 +90,24 @@ namespace _Project.System.StateMachine.StateMachine.ActiveStateManager
         }
         public bool IsStateActive(IState<T> state)
         {
-            return _activeStates.Contains(state);
-            //return activeStates.OfType<TState>().Any();
+            var bit = StateBitManager<T>.GetBitForType(state.GetType());
+            return (_activeStatesBits & bit) != 0; // Проверяем, активен ли бит
+        }
+        public bool IsStateActive(Type stateType)
+        {
+            var bit = StateBitManager<T>.GetBitForType(stateType);
+            return (_activeStatesBits & bit) != 0; // Проверяем, активен ли бит
         }
         public void Update(T context)
         {
             // activeStates.C
-            foreach (var state in _activeStates)
+            foreach (var state in _states)
             {
-                state.UpdateState(context);
+                if (!IsStateActive(state.Key))
+                {
+                    continue;
+                }
+                state.Value.UpdateState(context);
             }
         }
     }
