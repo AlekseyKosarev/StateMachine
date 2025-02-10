@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using _Project.System.StateMachine.Example.EVENTS;
+using _Project.System.StateMachine.Example.MiniTest;
 using UnityEngine;
 
 namespace _Project.System.StateMachine.Example.LevelBuilderSystem
@@ -10,6 +12,7 @@ namespace _Project.System.StateMachine.Example.LevelBuilderSystem
         public int countCopys = 1;
         public LevelData levelData;
 
+        private MiniStateController[] a;
         private void Awake()
         {
             levelData = GetComponent<LevelData>();
@@ -21,7 +24,22 @@ namespace _Project.System.StateMachine.Example.LevelBuilderSystem
             
             for (int i = 0; i < countCopys; i++)
             {
-                levelData.AddInstance(Instantiate(prefab));
+                 levelData.AddInstance(Instantiate(prefab));
+            }
+
+            a = levelData.Instances.ConvertAll(a=>a as MiniStateController).ToArray();
+        }
+
+        private void Update()
+        {
+            if (a == null)
+            {
+                return;
+            }
+            for (var i = 0; i < a.Length; i++)
+            {
+                var b = a[i];
+                b.Tick();
             }
         }
 

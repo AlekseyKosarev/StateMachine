@@ -2,6 +2,7 @@ using _Project.System.StateMachine.Example.EVENTS;
 using _Project.System.StateMachine.Example.LevelBuilderSystem;
 using _Project.System.StateMachine.StateMachine;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace _Project.System.StateMachine.Example.MiniTest
 {
@@ -20,7 +21,6 @@ namespace _Project.System.StateMachine.Example.MiniTest
         
         private void Update()
         {
-            _states.Update(_testContext);
         }
 
         public override void OnGame()
@@ -45,5 +45,10 @@ namespace _Project.System.StateMachine.Example.MiniTest
         //     GameSwitch.OnGame -= OnGame;
         //     GameSwitch.OnPause -= OnPause;
         // }
+        public void Tick()
+        {
+            _states.Update(_testContext);
+
+        }
     }
 }

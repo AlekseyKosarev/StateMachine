@@ -19,5 +19,7 @@ namespace _Project.System.StateMachine.Example.DirSimObj
         {
             // throw new NotImplementedException();
         }
+
+        public uint Index { get; set; }
     }
 }

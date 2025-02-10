@@ -20,5 +20,7 @@ namespace _Project.System.StateMachine.Example.DirSimObj
         {
             // 
         }
+
+        public uint Index { get; set; }
     }
 }

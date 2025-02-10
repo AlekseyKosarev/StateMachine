@@ -10,5 +10,6 @@ namespace _Project.System.StateMachine.Example.MonoBehaviorStates
         public abstract void ExitState(T context);
 
         public abstract void UpdateState(T context);
+        public uint Index { get; set; }
     }
 }

@@ -6,7 +6,9 @@ namespace _Project.System.StateMachine.Example.LevelBuilderSystem
     public class LevelData: MonoBehaviour
     {
         private List<BaseInstance> _instances;
-        
+
+        public List<BaseInstance> Instances => _instances;
+
         private void Clear() => _instances.Clear();
         public bool HasInstances() => _instances != null;
         public void SetInstances(List<BaseInstance> instances) => _instances = instances;

@@ -43,5 +43,7 @@ namespace _Project.System.StateMachine.Example.DirSimObj
             }
             _simulateStates.Update(_simulateData);
         }
+
+        public uint Index { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace _Project.System.StateMachine.StateMachine
         }
         public StateMachine<T> Build()
         {
-            _stateActivator = new StateActivator<T>(_stateRegistry.GetStatesDictBase());
+            _stateActivator = new StateActivator<T>(_stateRegistry.GetStatesBaseArray());
             _stateMachine = new StateMachine<T>(_stateRegistry, _stateActivator);
             return _stateMachine;
         }
@@ -46,7 +46,7 @@ namespace _Project.System.StateMachine.StateMachine
         }
         public StateMachineMono<T> Build()
         {
-            _stateActivator = new StateActivator<T>(_stateRegistry.GetStatesDictBase());
+            _stateActivator = new StateActivator<T>(_stateRegistry.GetStatesBaseArray());
             _stateMachine = new StateMachineMono<T>(_stateRegistry, _stateActivator);
             return _stateMachine;
         }
