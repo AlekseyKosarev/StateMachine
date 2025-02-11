@@ -7,8 +7,8 @@ namespace _Project.System.StateMachine.StateMachine
 {
     public abstract class BaseStateMachine<T>
     {
-        protected readonly StateRegistry<T> _stateRegistry;
         protected readonly StateActivator<T> _stateActivator;
+        protected readonly StateRegistry<T> _stateRegistry;
 
         protected BaseStateMachine(StateRegistry<T> stateRegistry, StateActivator<T> stateActivator)
         {
@@ -24,31 +24,27 @@ namespace _Project.System.StateMachine.StateMachine
         protected virtual void SetStateActiveBase<TState>(bool setActive, T context) where TState : IState<T>
         {
             var state = GetStateFromRegistryBase<TState>();
-            if (state == null)
-            {
-                return;
-            }
+            if (state == null) return;
             _stateActivator.ChangeStatusState(state, setActive, context);
         }
-        
+
         protected void SwitchToStateBase<TState>(T context) where TState : IState<T>
         {
             var state = GetStateFromRegistryBase<TState>();
-            if (state == null)
-            {
-                return;
-            }
+            if (state == null) return;
             _stateActivator.SwitchToState(state, context);
         }
 
         protected bool IsStateActiveBase(IState<T> state)
         {
-            return _stateActivator.IsStateActive(state);;
+            return _stateActivator.IsStateActive(state);
+            ;
         }
 
         protected IState<T> GetStateFromRegistryBase<TState>() where TState : IState<T>
         {
-            var state = _stateRegistry.GetStateFromRegistry<TState>();;
+            var state = _stateRegistry.GetStateFromRegistry<TState>();
+            ;
             if (state == null)
             {
                 Debug.LogError($"State of type {typeof(TState)} not found.");
@@ -57,8 +53,9 @@ namespace _Project.System.StateMachine.StateMachine
 
             return state;
         }
+
         /// <summary>
-        /// Updates all active states.
+        ///     Updates all active states.
         /// </summary>
         /// <param name="context">The context passed to the state.</param>
         public void Update(T context)

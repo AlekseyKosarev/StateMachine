@@ -3,32 +3,49 @@ using UnityEngine;
 
 namespace _Project.System.StateMachine.Example.LevelBuilderSystem
 {
-    public class LevelData: MonoBehaviour
+    public class LevelData : MonoBehaviour
     {
-        private List<BaseInstance> _instances;
+        public List<BaseInstance> Instances { get; private set; }
 
-        public List<BaseInstance> Instances => _instances;
+        private void Clear()
+        {
+            Instances.Clear();
+        }
 
-        private void Clear() => _instances.Clear();
-        public bool HasInstances() => _instances != null;
-        public void SetInstances(List<BaseInstance> instances) => _instances = instances;
+        public bool HasInstances()
+        {
+            return Instances != null;
+        }
+
+        public void SetInstances(List<BaseInstance> instances)
+        {
+            Instances = instances;
+        }
 
         public void AddInstance(BaseInstance instance)
         {
-            if (HasInstances() == false) _instances = new List<BaseInstance>();
-            _instances.Add(instance);
+            if (HasInstances() == false) Instances = new List<BaseInstance>();
+            Instances.Add(instance);
         }
+
         public void DestroyInstances()
         {
             if (HasInstances())
             {
-                _instances.ForEach(instance => Destroy(instance.gameObject));
+                Instances.ForEach(instance => Destroy(instance.gameObject));
                 Clear();
             }
-        } 
-        
+        }
+
         //вызывает произвольный метод
-        public void OnGame() => _instances.ForEach(instance => instance.OnGame());
-        public void OnPause() => _instances.ForEach(instance => instance.OnPause());
+        public void OnGame()
+        {
+            Instances.ForEach(instance => instance.OnGame());
+        }
+
+        public void OnPause()
+        {
+            Instances.ForEach(instance => instance.OnPause());
+        }
     }
 }

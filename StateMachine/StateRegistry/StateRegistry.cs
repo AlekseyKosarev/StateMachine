@@ -2,14 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Project.System.StateMachine.Interfaces;
-using UnityEngine;
-using Enumerable = System.Linq.Enumerable;
 
 namespace _Project.System.StateMachine.StateMachine.StateRegistry
 {
     public class StateRegistry<T>
     {
-        private Dictionary<Type, IState<T>> _states = new();
+        private readonly Dictionary<Type, IState<T>> _states = new();
 
         public void AddStateToRegistry<TState>(TState state) where TState : IState<T>
         {
@@ -30,8 +28,16 @@ namespace _Project.System.StateMachine.StateMachine.StateRegistry
         {
             return _states.Count;
         }
-        public List<IState<T>> GetStatesBase() => _states.Values.ToList();
-        public IState<T>[] GetStatesBaseArray() => _states.Values.ToArray();
+
+        public List<IState<T>> GetStatesBase()
+        {
+            return _states.Values.ToList();
+        }
+
+        public IState<T>[] GetStatesBaseArray()
+        {
+            return _states.Values.ToArray();
+        }
         // public Dictionary<Type, IState<T>> GetStatesDictBase() => _states;
     }
 }

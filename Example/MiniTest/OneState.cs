@@ -3,7 +3,7 @@ using _Project.System.StateMachine.Interfaces;
 
 namespace _Project.System.StateMachine.Example.MiniTest
 {
-    public class OneState: IState<TestContext>, IIndexed
+    public class OneState : IState<TestContext>, IIndexed
     {
         public void EnterState(TestContext context)
         {
