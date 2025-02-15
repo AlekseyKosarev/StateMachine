@@ -1,6 +1,6 @@
-using _Project.System.StateMachine.Interfaces;
+using StateMachineTools.Interfaces;
 
-namespace _Project.System.StateMachine.StateMachine.StateRegistry
+namespace StateMachineTools.StateMachine.StateRegistry
 {
     public interface IStateRegistry<T>
     {

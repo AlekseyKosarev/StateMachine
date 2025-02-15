@@ -1,7 +1,7 @@
-using _Project.System.StateMachine.Example.LevelBuilderSystem;
-using _Project.System.StateMachine.StateMachine;
+using StateMachineTools.Example.LevelBuilderSystem;
+using StateMachineTools.StateMachine;
 
-namespace _Project.System.StateMachine.Example.MiniTest
+namespace StateMachineTools.Example.MiniTest
 {
     public class MiniStateController : BaseInstance
     {

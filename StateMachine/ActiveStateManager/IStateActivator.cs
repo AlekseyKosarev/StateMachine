@@ -1,6 +1,6 @@
-using _Project.System.StateMachine.Interfaces;
+using StateMachineTools.Interfaces;
 
-namespace _Project.System.StateMachine.StateMachine.ActiveStateManager
+namespace StateMachineTools.StateMachine.ActiveStateManager
 {
     public interface IStateActivator<T>
     {

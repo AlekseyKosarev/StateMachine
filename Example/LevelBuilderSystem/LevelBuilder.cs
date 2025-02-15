@@ -1,8 +1,7 @@
-using _Project.System.StateMachine.Example.EVENTS;
-using _Project.System.StateMachine.Example.MiniTest;
+using StateMachineTools.Example.EVENTS;
 using UnityEngine;
 
-namespace _Project.System.StateMachine.Example.LevelBuilderSystem
+namespace StateMachineTools.Example.LevelBuilderSystem
 {
     public class LevelBuilder : MonoBehaviour
     {

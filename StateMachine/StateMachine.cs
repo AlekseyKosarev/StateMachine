@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using _Project.System.StateMachine.Interfaces;
-using _Project.System.StateMachine.StateMachine.ActiveStateManager;
-using _Project.System.StateMachine.StateMachine.StateRegistry;
+using StateMachineTools.Interfaces;
+using StateMachineTools.StateMachine.ActiveStateManager;
+using StateMachineTools.StateMachine.StateRegistry;
 
-namespace _Project.System.StateMachine.StateMachine
+namespace StateMachineTools.StateMachine
 {
     public class StateMachine<T> : BaseStateMachine<T>
     {

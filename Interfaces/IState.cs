@@ -1,6 +1,6 @@
-using _Project.System.StateMachine.BitMaskArray;
+using StateMachineTools.BitMaskArray;
 
-namespace _Project.System.StateMachine.Interfaces
+namespace StateMachineTools.Interfaces
 {
     public interface IState<T> : IIndexed
     {

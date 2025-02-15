@@ -1,4 +1,4 @@
-namespace _Project.System.StateMachine.Example.MiniTest
+namespace StateMachineTools.Example.MiniTest
 {
     public class TestContext
     {

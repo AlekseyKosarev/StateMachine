@@ -1,9 +1,9 @@
-using _Project.System.StateMachine.Example.EVENTS;
-using _Project.System.StateMachine.Example.LevelBuilderSystem;
+using StateMachineTools.Example.EVENTS;
+using StateMachineTools.Example.LevelBuilderSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace _Project.System.StateMachine.Example.UI.Scripts
+namespace StateMachineTools.Example.UI.Scripts
 {
     public class UIController : MonoBehaviour
     {
