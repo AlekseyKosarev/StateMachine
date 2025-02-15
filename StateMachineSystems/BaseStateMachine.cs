@@ -12,6 +12,8 @@ namespace StateMachine.StateMachineSystems
     {
         protected readonly StateActivator<T> _stateActivator;
         protected readonly StateRegistry<T> _stateRegistry;
+        
+        protected readonly List<IState<T>> _previousStates = new List<IState<T>>();
 
         protected BaseStateMachine(StateRegistry<T> stateRegistry, StateActivator<T> stateActivator)
         {
@@ -42,6 +44,17 @@ namespace StateMachine.StateMachineSystems
         protected bool IsStateActiveBase(IState<T> state)
         {
             return _stateActivator.IsStateActive(state);
+        }
+        private void ClearPreviousState() => _previousStates.Clear();
+        protected void SaveCurrentStatesToPreviousBase() => _previousStates.AddRange(GetActiveStatesBase());
+
+        protected void ActivateAllPreviousStates(T context)
+        {
+            ClearPreviousState();
+            foreach (var state in _previousStates)
+            {
+                _stateActivator.SetStateActive(state, true, context);
+            }
         }
 
         protected IState<T> GetStateFromRegistryBase<TState>() where TState : IState<T>

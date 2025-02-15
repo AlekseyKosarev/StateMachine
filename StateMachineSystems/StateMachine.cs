@@ -27,6 +27,8 @@ namespace StateMachine.StateMachineSystems
         {
             SwitchToStateBase<TState>(context);
         }
+        public void ActivatePreviousStates(T context) => base.ActivateAllPreviousStates(context);
+        public void SaveCurrentStatesToPrevious() => base.SaveCurrentStatesToPreviousBase();
 
         public bool IsStateActive(IState<T> state)
         {
@@ -38,6 +40,7 @@ namespace StateMachine.StateMachineSystems
             var state = GetStateFromRegistry<TState>();
             return IsStateActive(state);
         }
+
 
         public IState<T> GetStateFromRegistry<TState>() where TState : IState<T>
         {
