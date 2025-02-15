@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StateMachineTools.Example.LevelBuilderSystem
+namespace StateMachine.Example.LevelBuilderSystem
 {
     public class LevelData : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StateMachineTools.Example.LevelBuilderSystem
+namespace StateMachine.Example.LevelBuilderSystem
 {
     public abstract class BaseInstance : MonoBehaviour
     {

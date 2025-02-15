@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StateMachineTools.Example.EVENTS
+namespace StateMachine.Example.EVENTS
 {
     public class TestHandler : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace StateMachineTools.BitMaskArray
+namespace StateMachine.BitMaskArray
 {
     public class MaskArray
     {

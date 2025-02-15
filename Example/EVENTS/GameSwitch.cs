@@ -1,6 +1,6 @@
 using System;
 
-namespace StateMachineTools.Example.EVENTS
+namespace StateMachine.Example.EVENTS
 {
     public static class GameSwitch
     {
