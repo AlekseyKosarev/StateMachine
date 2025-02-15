@@ -28,6 +28,10 @@ namespace StateMachine.StateMachineSystems.StateRegistrySystem
         {
             return _states.Count;
         }
+        public List<Type> GetStatesTypesBase()
+        {
+            return _states.Keys.ToList();
+        }
 
         public List<IState<T>> GetStatesBase()
         {

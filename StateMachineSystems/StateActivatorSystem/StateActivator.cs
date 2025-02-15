@@ -31,7 +31,7 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
         }
         public void DeactivateAllStates(T context)
         {
-            foreach (var state in _activeStates.GetIndexesFromMask()) _all[state].ExitState(context);
+            foreach (var state in GetActiveStatesIndexes()) _all[state].ExitState(context);
             _activeStates.ClearMask();
         }
         public void SetStateActive(IState<T> state, bool setActive, T context)
@@ -56,7 +56,7 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
 
         public IState<T>[] GetActiveStates()
         {
-            var indexesActiveStates = _activeStates.GetIndexesFromMask();
+            var indexesActiveStates = GetActiveStatesIndexes();
             var currentActiveStates = new IState<T>[indexesActiveStates.Length];
             for (var i = 0; i < indexesActiveStates.Length; i++)
             {
@@ -65,9 +65,10 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
 
             return currentActiveStates;
         }
+        public int[] GetActiveStatesIndexes() => _activeStates.GetIndexesFromMask();
         public void Update(T context)
         {
-            var indexesActiveStates = _activeStates.GetIndexesFromMask();
+            var indexesActiveStates = GetActiveStatesIndexes();
             foreach (var state in indexesActiveStates) _all[state].UpdateState(context);
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using StateMachine.Interfaces;
@@ -54,6 +55,8 @@ namespace StateMachine.StateMachineSystems
 
             return state;
         }
+
+        protected List<Type> GetStatesTypesBase() => _stateRegistry.GetStatesTypesBase();
         protected List<IState<T>> GetStatesRegistryBase() => _stateRegistry.GetStatesBase();
         protected List<IState<T>> GetActiveStatesBase() => _stateActivator.GetActiveStates().ToList();
 

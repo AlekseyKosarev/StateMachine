@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using StateMachine.Interfaces;
 using StateMachine.StateMachineSystems.StateActivatorSystem;
@@ -47,8 +48,20 @@ namespace StateMachine.StateMachineSystems
         {
             return _stateRegistry.GetCountStatesBase();
         }
-
+        public List<Type> GetStatesTypes() => base.GetStatesTypesBase();
         public List<IState<T>> GetStatesRegistry() => base.GetStatesRegistryBase();
         public List<IState<T>> GetActiveStates() => base.GetActiveStatesBase();
+        public int[] GetActiveStatesIndexes() => _stateActivator.GetActiveStatesIndexes();
+
+        public List<Type> GetActiveStatesTypes()
+        {
+            var allTypes = GetStatesTypes();
+            var activeStates = GetActiveStatesIndexes();
+
+            var types = new List<Type>(activeStates.Length);
+            foreach (var index in activeStates) types.Add(allTypes[index]);
+            
+            return types;
+        }
     }
 }
