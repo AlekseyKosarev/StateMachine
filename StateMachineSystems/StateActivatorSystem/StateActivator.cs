@@ -1,7 +1,7 @@
-using StateMachineTools.BitMaskArray;
-using StateMachineTools.Interfaces;
+using StateMachine.BitMaskArray;
+using StateMachine.Interfaces;
 
-namespace StateMachineTools.StateMachine.ActiveStateManager
+namespace StateMachine.StateMachineSystems.StateActivatorSystem
 {
     public class StateActivator<T> : IStateActivator<T>
     {

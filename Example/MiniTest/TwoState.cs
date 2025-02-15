@@ -1,7 +1,7 @@
-using StateMachineTools.BitMaskArray;
-using StateMachineTools.Interfaces;
+using StateMachine.BitMaskArray;
+using StateMachine.Interfaces;
 
-namespace StateMachineTools.Example.MiniTest
+namespace StateMachine.Example.MiniTest
 {
     public class TwoState : IState<TestContext>, IIndexed
     {

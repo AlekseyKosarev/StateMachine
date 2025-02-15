@@ -1,11 +1,11 @@
 // Managers/MonoStateMachine.cs
 
-using StateMachineTools.Interfaces;
-using StateMachineTools.StateMachine.ActiveStateManager;
-using StateMachineTools.StateMachine.StateRegistry;
+using StateMachine.Interfaces;
+using StateMachine.StateMachineSystems.StateActivatorSystem;
+using StateMachine.StateMachineSystems.StateRegistrySystem;
 using UnityEngine;
 
-namespace StateMachineTools.StateMachine
+namespace StateMachine.StateMachineSystems
 {
     public class StateMachineMono<T> : BaseStateMachine<T>
     {

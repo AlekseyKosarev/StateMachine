@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using StateMachineTools.Interfaces;
+using StateMachine.Interfaces;
 
-namespace StateMachineTools.StateMachine.StateRegistry
+namespace StateMachine.StateMachineSystems.StateRegistrySystem
 {
     public class StateRegistry<T>
     {
