@@ -48,9 +48,7 @@ namespace _Project.System.StateMachine.StateMachine
             return _stateRegistry.GetCountStatesBase();
         }
 
-        public List<IState<T>> GetStates()
-        {
-            return _stateRegistry.GetStatesBase();
-        }
+        public List<IState<T>> GetStatesRegistry() => base.GetStatesRegistryBase();
+        public List<IState<T>> GetActiveStates() => base.GetActiveStatesBase();
     }
 }

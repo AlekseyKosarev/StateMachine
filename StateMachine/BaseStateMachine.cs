@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using _Project.System.StateMachine.Interfaces;
 using _Project.System.StateMachine.StateMachine.ActiveStateManager;
 using _Project.System.StateMachine.StateMachine.StateRegistry;
@@ -25,7 +27,7 @@ namespace _Project.System.StateMachine.StateMachine
         {
             var state = GetStateFromRegistryBase<TState>();
             if (state == null) return;
-            _stateActivator.ChangeStatusState(state, setActive, context);
+            _stateActivator.SetStateActive(state, setActive, context);
         }
 
         protected void SwitchToStateBase<TState>(T context) where TState : IState<T>
@@ -34,17 +36,16 @@ namespace _Project.System.StateMachine.StateMachine
             if (state == null) return;
             _stateActivator.SwitchToState(state, context);
         }
+        protected void DeactivateAllStates(T context) => _stateActivator.DeactivateAllStates(context);
 
         protected bool IsStateActiveBase(IState<T> state)
         {
             return _stateActivator.IsStateActive(state);
-            ;
         }
 
         protected IState<T> GetStateFromRegistryBase<TState>() where TState : IState<T>
         {
             var state = _stateRegistry.GetStateFromRegistry<TState>();
-            ;
             if (state == null)
             {
                 Debug.LogError($"State of type {typeof(TState)} not found.");
@@ -53,11 +54,9 @@ namespace _Project.System.StateMachine.StateMachine
 
             return state;
         }
+        protected List<IState<T>> GetStatesRegistryBase() => _stateRegistry.GetStatesBase();
+        protected List<IState<T>> GetActiveStatesBase() => _stateActivator.GetActiveStates().ToList();
 
-        /// <summary>
-        ///     Updates all active states.
-        /// </summary>
-        /// <param name="context">The context passed to the state.</param>
         public void Update(T context)
         {
             _stateActivator.Update(context);

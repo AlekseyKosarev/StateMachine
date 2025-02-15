@@ -15,6 +15,14 @@ namespace _Project.System.StateMachine.StateMachine
         {
             _stateRegistry = new StateRegistry<T>();
         }
+        public StateMachineBuilder<T> AddStatesFromList(IState<T>[] states)
+        {
+            foreach (var state in states)
+            {
+                _stateRegistry.AddStateToRegistry(state);
+            }
+            return this;
+        }
 
         public StateMachineBuilder<T> AddState<TState>(TState state) where TState : IState<T>
         {

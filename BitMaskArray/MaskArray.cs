@@ -55,7 +55,7 @@ namespace _Project.System.StateMachine.BitMaskArray
             _bitMask &= ~index;
         }
 
-        public int[] GetIndexesFromMask()
+        public int[] GetIndexesFromMask()//return indexes has ACTIVE
         {
             return _preComputedIndexes[_bitMask];
         }

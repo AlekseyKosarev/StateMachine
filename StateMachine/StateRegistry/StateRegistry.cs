@@ -38,6 +38,5 @@ namespace _Project.System.StateMachine.StateMachine.StateRegistry
         {
             return _states.Values.ToArray();
         }
-        // public Dictionary<Type, IState<T>> GetStatesDictBase() => _states;
     }
 }
