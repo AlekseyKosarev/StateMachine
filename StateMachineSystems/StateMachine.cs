@@ -27,6 +27,8 @@ namespace StateMachine.StateMachineSystems
         {
             SwitchToStateBase<TState>(context);
         }
+
+        public void DeactivateAllStates(T context) => base.DeactivateAllStatesBase(context);
         public void ActivatePreviousStates(T context) => base.ActivateAllPreviousStates(context);
         public void SaveCurrentStatesToPrevious() => base.SaveCurrentStatesToPreviousBase();
 

@@ -39,7 +39,7 @@ namespace StateMachine.StateMachineSystems
             if (state == null) return;
             _stateActivator.SwitchToState(state, context);
         }
-        protected void DeactivateAllStates(T context) => _stateActivator.DeactivateAllStates(context);
+        protected void DeactivateAllStatesBase(T context) => _stateActivator.DeactivateAllStates(context);
 
         protected bool IsStateActiveBase(IState<T> state)
         {
