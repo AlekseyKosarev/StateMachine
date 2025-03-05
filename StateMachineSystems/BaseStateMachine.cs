@@ -50,11 +50,11 @@ namespace StateMachine.StateMachineSystems
 
         protected void ActivateAllPreviousStates(T context)
         {
-            ClearPreviousState();
             foreach (var state in _previousStates)
             {
                 _stateActivator.SetStateActive(state, true, context);
             }
+            ClearPreviousState();
         }
 
         protected IState<T> GetStateFromRegistryBase<TState>() where TState : IState<T>
