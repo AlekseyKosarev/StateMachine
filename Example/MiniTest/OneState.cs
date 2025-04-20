@@ -3,7 +3,7 @@ using StateMachine.Interfaces;
 
 namespace StateMachine.Example.MiniTest
 {
-    public class OneState : IState<TestContext>, IIndexed
+    public class OneState : IState<TestContext>
     {
         public void EnterState(TestContext context)
         {
@@ -21,5 +21,26 @@ namespace StateMachine.Example.MiniTest
         }
 
         public uint Index { get; set; }
+        public bool IsCounted { get; set; }
+        public int Count { get; private set; }
+
+        public void IncrementCount()
+        {
+            if(IsCounted) Count++;
+        }
+
+        public void DecrementCount()
+        {
+            if(IsCounted) Count--;
+        }
+
+        public void ResetCount()
+        {
+            Count = 0;
+        }
+        public bool IsCountZero()
+        {
+            return Count == 0;
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
 
         public void ActivateState(IState<T> state, T context)
         {
+            state.IncrementCount();
             if (_activeStates.Contains(state.GetIndex())) return;
 
             _activeStates.Add(state.GetIndex());
@@ -25,13 +26,19 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
         public void DeactivateState(IState<T> state, T context)
         {
             if (!_activeStates.Contains(state.GetIndex())) return;
-
+            state.DecrementCount();
+            if (!state.IsCountZero()) return;
+            
             _activeStates.Remove(state.GetIndex());
             state.ExitState(context);
         }
         public void DeactivateAllStates(T context)
         {
-            foreach (var state in GetActiveStatesIndexes()) _all[state].ExitState(context);
+            foreach (var state in GetActiveStatesIndexes())
+            {
+                _all[state].ResetCount();
+                _all[state].ExitState(context);
+            }
             _activeStates.ClearMask();
         }
         public void SetStateActive(IState<T> state, bool setActive, T context)
