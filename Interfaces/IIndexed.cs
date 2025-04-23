@@ -1,4 +1,4 @@
-namespace StateMachine.BitMaskArray
+namespace StateMachine.Interfaces
 {
     public interface IIndexed
     {

@@ -3,17 +3,43 @@ using StateMachine.Interfaces;
 
 namespace StateMachine.StateMachineSystems.StateActivatorSystem
 {
+    /// <summary>
+    ///     This class is responsible for switching between states and updating them.
+    /// </summary>
+    /// <typeparam name="T">The type of the context object that the states belong to.</typeparam>
     public class StateActivator<T> : IStateActivator<T>
     {
         private readonly MaskArray _activeStates;
         private readonly IState<T>[] _all;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="StateActivator{T}" /> class.
+        /// </summary>
+        /// <param name="states">
+        ///     An array of all possible states. Important: After initialization, adding new states is not
+        ///     allowed.
+        /// </param>
         public StateActivator(IState<T>[] states)
         {
             _activeStates = new MaskArray(states);
             _all = states;
         }
 
+        /// <summary>
+        ///     Activates the specified state.
+        /// </summary>
+        /// <param name="state">The state to activate.</param>
+        /// <param name="context">The context object passed to the state.</param>
+        /// <remarks>
+        ///     <para>Cannot activate an already active state.</para>
+        ///     <para>
+        ///         If <see cref="IState{T}.IsCounted" /> is
+        ///         <b>
+        ///             <c>true</c>
+        ///         </b>
+        ///         , the activation counter is incremented by 1 regardless of the current state.
+        ///     </para>
+        /// </remarks>
         public void ActivateState(IState<T> state, T context)
         {
             state.IncrementCount();
@@ -23,15 +49,62 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
             state.EnterState(context);
         }
 
+        /// <summary>
+        ///     Deactivates the specified state.
+        /// </summary>
+        /// <param name="state">The state to deactivate.</param>
+        /// <param name="context">The context object passed to the state.</param>
+        /// <remarks>
+        ///     <para>If the state is not active, this method does nothing.</para>
+        ///     <para>
+        ///         If <see cref="IState{T}.IsCounted" /> is
+        ///         <b>
+        ///             <c>true</c>
+        ///         </b>
+        ///         , the activation counter is decremented. The state is deactivated only if the counter reaches zero.
+        ///     </para>
+        ///     <para>
+        ///         If <see cref="IState{T}.IsCounted" /> is
+        ///         <b>
+        ///             <c>false</c>
+        ///         </b>
+        ///         , the counter is ignored, and the state is guaranteed to be deactivated.
+        ///     </para>
+        /// </remarks>
         public void DeactivateState(IState<T> state, T context)
         {
             if (!_activeStates.Contains(state.GetIndex())) return;
             state.DecrementCount();
             if (!state.IsCountZero()) return;
-            
+
             _activeStates.Remove(state.GetIndex());
             state.ExitState(context);
         }
+
+        /// <summary>
+        ///     Updates all currently active states by invoking their <see cref="IState{T}.UpdateState" /> methods.
+        /// </summary>
+        /// <param name="context">The context object passed to the states.</param>
+        public void UpdateStates(T context)
+        {
+            var indexesActiveStates = GetActiveStatesIndexes();
+            foreach (var state in indexesActiveStates) _all[state].UpdateState(context);
+        }
+
+        /// <summary>
+        ///     Deactivates all currently active states.
+        /// </summary>
+        /// <param name="context">The context object passed to the states.</param>
+        /// <remarks>
+        ///     <para>
+        ///         Resets the activation counter for states where <see cref="IState{T}.IsCounted" /> is
+        ///         <b>
+        ///             <c>true</c>
+        ///         </b>
+        ///         .
+        ///     </para>
+        ///     <para>Clears the mask of active states.</para>
+        /// </remarks>
         public void DeactivateAllStates(T context)
         {
             foreach (var state in GetActiveStatesIndexes())
@@ -39,8 +112,16 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
                 _all[state].ResetCount();
                 _all[state].ExitState(context);
             }
+
             _activeStates.ClearMask();
         }
+
+        /// <summary>
+        ///     Sets the specified state as active or inactive based on the provided flag.
+        /// </summary>
+        /// <param name="state">The state to modify.</param>
+        /// <param name="setActive">A flag indicating whether to activate (<c>true</c>) or deactivate (<c>false</c>) the state.</param>
+        /// <param name="context">The context object passed to the state.</param>
         public void SetStateActive(IState<T> state, bool setActive, T context)
         {
             if (setActive)
@@ -49,6 +130,14 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
                 DeactivateState(state, context);
         }
 
+        /// <summary>
+        ///     Switches to the specified state by deactivating all other states and activating the target state.
+        /// </summary>
+        /// <param name="state">The state to switch to.</param>
+        /// <param name="context">The context object passed to the state.</param>
+        /// <remarks>
+        ///     <para>If the target state is already active, this method does nothing.</para>
+        /// </remarks>
         public void SwitchToState(IState<T> state, T context)
         {
             if (IsStateActive(state)) return;
@@ -56,27 +145,36 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
             ActivateState(state, context);
         }
 
+        /// <summary>
+        ///     Determines whether the specified state is currently active.
+        /// </summary>
+        /// <param name="state">The state to check.</param>
+        /// <returns><c>true</c> if the state is active; otherwise, <c>false</c>.</returns>
         public bool IsStateActive(IState<T> state)
         {
             return _activeStates.Contains(state.GetIndex());
         }
 
+        /// <summary>
+        ///     Retrieves an array of all currently active states.
+        /// </summary>
+        /// <returns>An array of active states.</returns>
         public IState<T>[] GetActiveStates()
         {
             var indexesActiveStates = GetActiveStatesIndexes();
             var currentActiveStates = new IState<T>[indexesActiveStates.Length];
-            for (var i = 0; i < indexesActiveStates.Length; i++)
-            {
-                currentActiveStates[i] = _all[indexesActiveStates[i]];
-            }
+            for (var i = 0; i < indexesActiveStates.Length; i++) currentActiveStates[i] = _all[indexesActiveStates[i]];
 
             return currentActiveStates;
         }
-        public int[] GetActiveStatesIndexes() => _activeStates.GetIndexesFromMask();
-        public void Update(T context)
+
+        /// <summary>
+        ///     Retrieves an array of indices representing the currently active states.
+        /// </summary>
+        /// <returns>An array of indices of active states.</returns>
+        public int[] GetActiveStatesIndexes()
         {
-            var indexesActiveStates = GetActiveStatesIndexes();
-            foreach (var state in indexesActiveStates) _all[state].UpdateState(context);
+            return _activeStates.GetIndexesFromMask();
         }
     }
 }

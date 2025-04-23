@@ -1,5 +1,7 @@
 using StateMachine.Example.LevelBuilderSystem;
+using StateMachine.Interfaces;
 using StateMachine.StateMachineSystems;
+using UnityEngine;
 
 namespace StateMachine.Example.MiniTest
 {
@@ -10,10 +12,18 @@ namespace StateMachine.Example.MiniTest
 
         private void Awake()
         {
+            // _states = new StateMachineBuilder<TestContext>()
+            //     .AddState(new OneState())
+            //     .AddState(new TwoState())
+            //     .Build();
+            
             _states = new StateMachineBuilder<TestContext>()
-                .AddState(new OneState())
-                .AddState(new TwoState())
+                .AddStates(new OneState(), new TwoState())
                 .Build();
+            
+            var st = _states.GetStatesRegistry();
+            Debug.Log(st.Count);
+            Debug.Log(st[0].GetType().Name);
         }
 
         private void Update()
@@ -23,7 +33,7 @@ namespace StateMachine.Example.MiniTest
 
         public override void OnGame()
         {
-            _states.SetStateActive<OneState>(true, _testContext);
+            _states.SwitchToState<OneState>(_testContext);
         }
 
         public override void OnPause()
@@ -32,7 +42,7 @@ namespace StateMachine.Example.MiniTest
         }
         public void Tick()
         {
-            _states.Update(_testContext);
+            _states.UpdateStates(_testContext);
         }
     }
 }

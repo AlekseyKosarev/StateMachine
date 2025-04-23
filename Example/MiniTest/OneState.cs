@@ -1,5 +1,6 @@
 using StateMachine.BitMaskArray;
 using StateMachine.Interfaces;
+using UnityEngine;
 
 namespace StateMachine.Example.MiniTest
 {
@@ -17,6 +18,7 @@ namespace StateMachine.Example.MiniTest
 
         public void UpdateState(TestContext context)
         {
+            Debug.Log("UPD -------- One");
             // throw new NotImplementedException();
         }
 

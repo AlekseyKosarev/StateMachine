@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using StateMachine.Interfaces;
 
 namespace StateMachine.BitMaskArray
 {
