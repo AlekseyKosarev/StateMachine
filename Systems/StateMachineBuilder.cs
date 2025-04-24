@@ -1,9 +1,9 @@
 using System.Linq;
 using StateMachine.Interfaces;
-using StateMachine.StateMachineSystems.StateActivatorSystem;
-using StateMachine.StateMachineSystems.StateRegistrySystem;
+using StateMachine.Systems.StateActivatorSystem;
+using StateMachine.Systems.StateRegistrySystem;
 
-namespace StateMachine.StateMachineSystems
+namespace StateMachine.Systems
 {
     public class StateMachineBuilder<T>
     {

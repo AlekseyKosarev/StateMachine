@@ -1,5 +1,4 @@
 using StateMachine.Interfaces;
-using Unity.VisualScripting;
 
 namespace StateMachine.BasedState
 {
@@ -13,9 +12,14 @@ namespace StateMachine.BasedState
             set => _isFirstEnter = value;
         }
 
-        public uint Index { get; set; }
-
         public abstract void Init(T context);
+
+        public void ResetState()
+        {
+            _isFirstEnter = true;
+        }
+
+        public uint Index { get; set; }
 
         public virtual void EnterState(T context)
         {
@@ -29,10 +33,5 @@ namespace StateMachine.BasedState
         public abstract void ExitState(T context);
 
         public abstract void UpdateState(T context);
-
-        public void ResetState()
-        {
-            _isFirstEnter = true;
-        }
     }
 }

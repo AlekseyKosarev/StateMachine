@@ -5,8 +5,8 @@ namespace StateMachine.BitMaskArray
 {
     public class MaskArray
     {
-        private uint _bitMask;
         private readonly int[][] _preComputedIndexes;
+        private uint _bitMask;
 
         public MaskArray(IIndexed[] items)
         {
@@ -56,7 +56,7 @@ namespace StateMachine.BitMaskArray
             _bitMask &= ~index;
         }
 
-        public int[] GetIndexesFromMask()//return indexes has ACTIVE
+        public int[] GetIndexesFromMask() //return indexes has ACTIVE
         {
             return _preComputedIndexes[_bitMask];
         }

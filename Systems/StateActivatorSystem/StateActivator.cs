@@ -1,7 +1,7 @@
 using StateMachine.BitMaskArray;
 using StateMachine.Interfaces;
 
-namespace StateMachine.StateMachineSystems.StateActivatorSystem
+namespace StateMachine.Systems.StateActivatorSystem
 {
     /// <summary>
     ///     This class is responsible for switching between states and updating them.
@@ -33,7 +33,8 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
         /// <remarks>
         ///     <para>Cannot activate an already active state.</para>
         ///     <para>
-        ///         If state inherits from <see cref="ICounted" />, the activation counter is incremented by 1 regardless of the current state.
+        ///         If state inherits from <see cref="ICounted" />, the activation counter is incremented by 1 regardless of the
+        ///         current state.
         ///     </para>
         /// </remarks>
         public void ActivateState(IState<T> state, T context)
@@ -55,7 +56,7 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
         ///     <para>If the state is not active, this method does nothing.</para>
         ///     <para>
         ///         If state inherits from <see cref="ICounted" />, the activation counter is decremented.
-        ///     <para>The state is deactivated only if the counter reaches zero.</para>
+        ///         <para>The state is deactivated only if the counter reaches zero.</para>
         ///     </para>
         /// </remarks>
         public void DeactivateState(IState<T> state, T context)
@@ -88,7 +89,7 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
         /// <remarks>
         ///     <para>Clears the mask of active states.</para>
         ///     <para>
-        ///         Resets the activation counter for states that inherit from <see cref="ICounted" /> 
+        ///         Resets the activation counter for states that inherit from <see cref="ICounted" />
         ///     </para>
         /// </remarks>
         public void DeactivateAllStates(T context)

@@ -1,7 +1,5 @@
 using StateMachine.Example.LevelBuilderSystem;
-using StateMachine.Interfaces;
-using StateMachine.StateMachineSystems;
-using UnityEngine;
+using StateMachine.Systems;
 
 namespace StateMachine.Example.MiniTest
 {
@@ -15,7 +13,7 @@ namespace StateMachine.Example.MiniTest
             _states = new StateMachineBuilder<TestContext_SM_EX>()
                 .AddStates(new OneState_SM_EX(), new TwoState_SM_EX())
                 .Build();
-            
+
             _states.SetStateActive<OneState_SM_EX>(true, _testContextSmEx);
             _states.SetStateActive<TwoState_SM_EX>(true, _testContextSmEx);
         }

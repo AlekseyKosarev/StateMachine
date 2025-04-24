@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using StateMachine.Interfaces;
-using StateMachine.StateMachineSystems.StateActivatorSystem;
-using StateMachine.StateMachineSystems.StateRegistrySystem;
+using StateMachine.Systems.StateActivatorSystem;
+using StateMachine.Systems.StateRegistrySystem;
 using UnityEngine;
 
-namespace StateMachine.StateMachineSystems
+namespace StateMachine.Systems
 {
     /// <summary>
     ///     Base class for implementing finite state machines.
@@ -75,13 +75,13 @@ namespace StateMachine.StateMachineSystems
             if (state == null) return;
             _stateActivator.SwitchToState(state, context);
         }
-        
+
         /// <inheritdoc cref="StateActivator{T}.DeactivateAllStates" />
         protected void DeactivateAllStatesBase(T context)
         {
             _stateActivator.DeactivateAllStates(context);
         }
-        
+
         /// <inheritdoc cref="StateActivator{T}.IsStateActive" />
         protected bool IsStateActiveBase(IState<T> state)
         {

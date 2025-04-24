@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using StateMachine.Interfaces;
-using StateMachine.StateMachineSystems.StateActivatorSystem;
-using StateMachine.StateMachineSystems.StateRegistrySystem;
+using StateMachine.Systems.StateActivatorSystem;
+using StateMachine.Systems.StateRegistrySystem;
 
-namespace StateMachine.StateMachineSystems
+namespace StateMachine.Systems
 {
     public class StateMachine<T> : BaseStateMachine<T>
     {
@@ -42,13 +42,13 @@ namespace StateMachine.StateMachineSystems
         {
             base.SetStateActiveBase<TState>(setActive, context);
         }
-        
+
         /// <inheritdoc cref="BaseStateMachine{T}.SwitchToStateBase{TState}" />
         public void SwitchToState<TState>(T context) where TState : IState<T>
         {
             SwitchToStateBase<TState>(context);
         }
-        
+
         /// <inheritdoc cref="BaseStateMachine{T}.DeactivateAllStatesBase" />
         public void DeactivateAllStates(T context)
         {

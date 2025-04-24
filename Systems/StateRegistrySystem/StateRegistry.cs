@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using StateMachine.Interfaces;
 
-namespace StateMachine.StateMachineSystems.StateRegistrySystem
+namespace StateMachine.Systems.StateRegistrySystem
 {
     /// <summary>
     ///     Represents a registry of states for an object.
