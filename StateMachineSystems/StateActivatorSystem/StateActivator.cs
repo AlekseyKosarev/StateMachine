@@ -33,16 +33,13 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
         /// <remarks>
         ///     <para>Cannot activate an already active state.</para>
         ///     <para>
-        ///         If <see cref="IState{T}.IsCounted" /> is
-        ///         <b>
-        ///             <c>true</c>
-        ///         </b>
-        ///         , the activation counter is incremented by 1 regardless of the current state.
+        ///         If state inherits from <see cref="ICounted" />, the activation counter is incremented by 1 regardless of the current state.
         ///     </para>
         /// </remarks>
         public void ActivateState(IState<T> state, T context)
         {
-            state.IncrementCount();
+            if (state is ICounted countedState)
+                countedState.IncrementCount();
             if (_activeStates.Contains(state.GetIndex())) return;
 
             _activeStates.Add(state.GetIndex());
@@ -57,25 +54,18 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
         /// <remarks>
         ///     <para>If the state is not active, this method does nothing.</para>
         ///     <para>
-        ///         If <see cref="IState{T}.IsCounted" /> is
-        ///         <b>
-        ///             <c>true</c>
-        ///         </b>
-        ///         , the activation counter is decremented. The state is deactivated only if the counter reaches zero.
-        ///     </para>
-        ///     <para>
-        ///         If <see cref="IState{T}.IsCounted" /> is
-        ///         <b>
-        ///             <c>false</c>
-        ///         </b>
-        ///         , the counter is ignored, and the state is guaranteed to be deactivated.
+        ///         If state inherits from <see cref="ICounted" />, the activation counter is decremented.
+        ///     <para>The state is deactivated only if the counter reaches zero.</para>
         ///     </para>
         /// </remarks>
         public void DeactivateState(IState<T> state, T context)
         {
             if (!_activeStates.Contains(state.GetIndex())) return;
-            state.DecrementCount();
-            if (!state.IsCountZero()) return;
+            if (state is ICounted countedState)
+            {
+                countedState.DecrementCount();
+                if (countedState.Count != 0) return;
+            }
 
             _activeStates.Remove(state.GetIndex());
             state.ExitState(context);
@@ -96,20 +86,17 @@ namespace StateMachine.StateMachineSystems.StateActivatorSystem
         /// </summary>
         /// <param name="context">The context object passed to the states.</param>
         /// <remarks>
-        ///     <para>
-        ///         Resets the activation counter for states where <see cref="IState{T}.IsCounted" /> is
-        ///         <b>
-        ///             <c>true</c>
-        ///         </b>
-        ///         .
-        ///     </para>
         ///     <para>Clears the mask of active states.</para>
+        ///     <para>
+        ///         Resets the activation counter for states that inherit from <see cref="ICounted" /> 
+        ///     </para>
         /// </remarks>
         public void DeactivateAllStates(T context)
         {
             foreach (var state in GetActiveStatesIndexes())
             {
-                _all[state].ResetCount();
+                if (_all[state] is ICounted countedState)
+                    countedState.ResetCount();
                 _all[state].ExitState(context);
             }
 

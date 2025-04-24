@@ -42,22 +42,13 @@ namespace StateMachine.StateMachineSystems
         {
             base.SetStateActiveBase<TState>(setActive, context);
         }
-
-        /// <summary>
-        ///     Switches the current state to the specified state.
-        /// </summary>
-        /// <typeparam name="TState">The type of the target state.</typeparam>
-        /// <param name="context">The context of the state.</param>
+        
         /// <inheritdoc cref="BaseStateMachine{T}.SwitchToStateBase{TState}" />
         public void SwitchToState<TState>(T context) where TState : IState<T>
         {
             SwitchToStateBase<TState>(context);
         }
-
-        /// <summary>
-        ///     Deactivates all active states.
-        /// </summary>
-        /// <param name="context">The context of the state.</param>
+        
         /// <inheritdoc cref="BaseStateMachine{T}.DeactivateAllStatesBase" />
         public void DeactivateAllStates(T context)
         {

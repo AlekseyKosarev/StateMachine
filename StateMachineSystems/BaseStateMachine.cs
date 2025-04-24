@@ -75,22 +75,13 @@ namespace StateMachine.StateMachineSystems
             if (state == null) return;
             _stateActivator.SwitchToState(state, context);
         }
-
-        /// <summary>
-        ///     Deactivates all active states.
-        /// </summary>
-        /// <param name="context">The context of the state.</param>
+        
         /// <inheritdoc cref="StateActivator{T}.DeactivateAllStates" />
         protected void DeactivateAllStatesBase(T context)
         {
             _stateActivator.DeactivateAllStates(context);
         }
-
-        /// <summary>
-        ///     Checks if the specified state is active.
-        /// </summary>
-        /// <param name="state">The state to check.</param>
-        /// <returns><c>true</c> if the state is active; otherwise, <c>false</c>.</returns>
+        
         /// <inheritdoc cref="StateActivator{T}.IsStateActive" />
         protected bool IsStateActiveBase(IState<T> state)
         {

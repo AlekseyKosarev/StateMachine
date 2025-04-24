@@ -22,22 +22,22 @@ namespace StateMachine.Example.EVENTS
 
         private void OnGame()
         {
-            Debug.Log("OnGame Handler");
+            // Debug.Log("OnGame Handler");
         }
 
         private void OnPause()
         {
-            Debug.Log("OnPause Handler");
+            // Debug.Log("OnPause Handler");
         }
 
         private void OnLoad()
         {
-            Debug.Log("OnLoad Handler");
+            // Debug.Log("OnLoad Handler");
         }
 
         private void OnExit()
         {
-            Debug.Log("OnExit Handler");
+            // Debug.Log("OnExit Handler");
         }
     }
 }

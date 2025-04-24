@@ -10,16 +10,10 @@ namespace StateMachine.Interfaces
     public interface ICounted
     {
         /// <summary>
-        /// Gets or sets a value indicating whether the state uses reference counting.
-        /// </summary>
-        /// <value><c>true</c> if the state uses reference counting; otherwise, <c>false</c>.</value>
-        bool IsCounted { get; set; }
-
-        /// <summary>
         /// Gets the current reference count of the state.
         /// </summary>
         /// <value>The current reference count.</value>
-        int Count { get; }
+        int Count { get;}
 
         /// <summary>
         /// Increments the reference count by one.
@@ -45,11 +39,5 @@ namespace StateMachine.Interfaces
         /// <para>This method can be used to force-deactivate the state.</para>
         /// </remarks>
         void ResetCount();
-
-        /// <summary>
-        /// Checks if the reference count is zero.
-        /// </summary>
-        /// <returns><c>true</c> if the reference count is zero; otherwise, <c>false</c>.</returns>
-        bool IsCountZero();
     }
 }

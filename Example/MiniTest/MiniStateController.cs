@@ -12,18 +12,12 @@ namespace StateMachine.Example.MiniTest
 
         private void Awake()
         {
-            // _states = new StateMachineBuilder<TestContext>()
-            //     .AddState(new OneState())
-            //     .AddState(new TwoState())
-            //     .Build();
-            
             _states = new StateMachineBuilder<TestContext>()
                 .AddStates(new OneState(), new TwoState())
                 .Build();
             
-            var st = _states.GetStatesRegistry();
-            Debug.Log(st.Count);
-            Debug.Log(st[0].GetType().Name);
+            _states.SetStateActive<OneState>(true, _testContext);
+            _states.SetStateActive<TwoState>(true, _testContext);
         }
 
         private void Update()
@@ -33,13 +27,16 @@ namespace StateMachine.Example.MiniTest
 
         public override void OnGame()
         {
-            _states.SwitchToState<OneState>(_testContext);
+            _states.SetStateActive<OneState>(false, _testContext);
+            _states.SetStateActive<TwoState>(false, _testContext);
         }
 
         public override void OnPause()
         {
-            _states.SwitchToState<TwoState>(_testContext);
+            _states.SetStateActive<OneState>(true, _testContext);
+            _states.SetStateActive<TwoState>(true, _testContext);
         }
+
         public void Tick()
         {
             _states.UpdateStates(_testContext);

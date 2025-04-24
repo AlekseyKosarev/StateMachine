@@ -4,7 +4,7 @@ namespace StateMachine.Interfaces
     /// Defines the behavior of a state in a finite state machine.
     /// </summary>
     /// <typeparam name="T">The type of context used in the state.</typeparam>
-    public interface IState<T> : IIndexed, ICounted
+    public interface IState<T> : IIndexed
     {
         /// <summary>
         /// Called when the state is activated.
