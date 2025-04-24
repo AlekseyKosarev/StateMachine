@@ -2,22 +2,22 @@ using UnityEngine;
 
 namespace StateMachine.Example.EVENTS
 {
-    public class TestHandler : MonoBehaviour
+    public class TestHandler_SM_EX : MonoBehaviour
     {
         private void OnEnable()
         {
-            GameSwitch.OnGame += OnGame;
-            GameSwitch.OnPause += OnPause;
-            GameSwitch.OnLoad += OnLoad;
-            GameSwitch.OnExit += OnExit;
+            GameSwitch_SM_EX.OnGame += OnGame;
+            GameSwitch_SM_EX.OnPause += OnPause;
+            GameSwitch_SM_EX.OnLoad += OnLoad;
+            GameSwitch_SM_EX.OnExit += OnExit;
         }
 
         private void OnDisable()
         {
-            GameSwitch.OnGame -= OnGame;
-            GameSwitch.OnPause -= OnPause;
-            GameSwitch.OnLoad -= OnLoad;
-            GameSwitch.OnExit -= OnExit;
+            GameSwitch_SM_EX.OnGame -= OnGame;
+            GameSwitch_SM_EX.OnPause -= OnPause;
+            GameSwitch_SM_EX.OnLoad -= OnLoad;
+            GameSwitch_SM_EX.OnExit -= OnExit;
         }
 
         private void OnGame()

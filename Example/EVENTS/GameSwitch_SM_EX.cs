@@ -2,7 +2,7 @@ using System;
 
 namespace StateMachine.Example.EVENTS
 {
-    public static class GameSwitch
+    public static class GameSwitch_SM_EX
     {
         //Singleton
 

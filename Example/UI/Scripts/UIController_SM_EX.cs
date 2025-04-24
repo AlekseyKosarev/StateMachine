@@ -1,20 +1,21 @@
 using StateMachine.Example.EVENTS;
 using StateMachine.Example.LevelBuilderSystem;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 namespace StateMachine.Example.UI.Scripts
 {
-    public class UIController : MonoBehaviour
+    public class UIController_SM_EX : MonoBehaviour
     {
-        public LevelBuilder levelBuilder;
+        [FormerlySerializedAs("levelBuilder")] public LevelBuilder_SM_EX levelBuilderSmEx;
         private Button _reloadBtn;
         private Button _switchActiveBtn;
         private TextField _textBox;
 
         private void Start()
         {
-            if (levelBuilder == null) Debug.LogError("LevelBuilder == null");
+            if (levelBuilderSmEx == null) Debug.LogError("LevelBuilder == null");
 
             var root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -28,15 +29,15 @@ namespace StateMachine.Example.UI.Scripts
 
         private void ClickSwitch(ClickEvent evt)
         {
-            GameSwitch.SwitchActiveGameTo();
+            GameSwitch_SM_EX.SwitchActiveGameTo();
         }
 
         private void ClickReload(ClickEvent evt)
         {
             //convert _textBox.value to int
             if (_textBox.value == "") return;
-            levelBuilder.countCopys = int.Parse(_textBox.value);
-            GameSwitch.Reload();
+            levelBuilderSmEx.countCopys = int.Parse(_textBox.value);
+            GameSwitch_SM_EX.Reload();
         }
     }
 }

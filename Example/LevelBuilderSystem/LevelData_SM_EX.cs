@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace StateMachine.Example.LevelBuilderSystem
 {
-    public class LevelData : MonoBehaviour
+    public class LevelData_SM_EX : MonoBehaviour
     {
-        public List<BaseInstance> Instances { get; private set; }
+        public List<BaseInstance_SM_EX> Instances { get; private set; }
 
         private void Clear()
         {
@@ -17,15 +17,15 @@ namespace StateMachine.Example.LevelBuilderSystem
             return Instances != null;
         }
 
-        public void SetInstances(List<BaseInstance> instances)
+        public void SetInstances(List<BaseInstance_SM_EX> instances)
         {
             Instances = instances;
         }
 
-        public void AddInstance(BaseInstance instance)
+        public void AddInstance(BaseInstance_SM_EX instanceSmEx)
         {
-            if (HasInstances() == false) Instances = new List<BaseInstance>();
-            Instances.Add(instance);
+            if (HasInstances() == false) Instances = new List<BaseInstance_SM_EX>();
+            Instances.Add(instanceSmEx);
         }
 
         public void DestroyInstances()
